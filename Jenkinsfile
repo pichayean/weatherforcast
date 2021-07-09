@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage('Staging') {
             steps {
-                sh 'kubectl apply -f ./k8s/deployment.yml';
+                sh 'kubectl apply -f deployment.yml';
             }
         }
         stage('Check Staging Ready') {
