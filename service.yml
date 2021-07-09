@@ -4,7 +4,7 @@ metadata:
   name: weatherforcast-service
 spec:
   selector:
-    app: weatherforcast-pod1
+    app: weatherforcast-pod
   ports:
   - port: 3000
     targetPort: 5000

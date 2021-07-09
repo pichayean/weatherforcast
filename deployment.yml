@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: weatherforcast-container
-        image: pichayean/weatherforcast:v1
+        image: weatherforecast:v2
         resources:
           limits:
             memory: "128Mi"
