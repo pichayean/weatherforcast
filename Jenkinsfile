@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Deployment') {
             steps {
-                sh 'kubectl apply -f ./k8s/deployment.yml';
+                sh 'kubectl apply -f deployment.yml';
             }
         }
         stage('Check Staging Ready') {
