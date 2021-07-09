@@ -30,7 +30,7 @@ pipeline {
                 script {
                     try {
                         sleep 40 
-                        code = sh(returnStdout: true, script: "curl -o /dev/null -s -w '%{http_code}' http://194.233.73.42:3000/alive").trim()
+                        code = sh(returnStdout: true, script: "curl -o /dev/null -s -w '%{http_code}' http://194.233.73.42:3000/WeatherForecast/alive").trim()
                         echo "HTTP response status code: ${code}"
                         notify('Deploy new version Success 😜💖', '3')
                     } catch (Exception e){
