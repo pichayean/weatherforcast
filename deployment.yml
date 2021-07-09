@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: weatherforcast-service
+spec:
+  selector:
+    app: weatherforcast-pod
+  ports:
+  - port: 3000
+    targetPort: 5000
+  type: LoadBalancer
+  externalIPs:
+  - 194.233.73.42
+  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weatherforcast-deployment
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: weatherforcast-pod
+  template:
+    metadata:
+      labels:
+        app: weatherforcast-pod
+    spec:
+      containers:
+      - name: weatherforcast-container
+        image: pichayean/weatherforcast:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "50m"
+        env:
+        - name: "Site__SiteId"
+          value: "1"
+        - name: "Site__Theme"
+          value: "Limitless"
+        - name: "RemoteClient__HostUrl"
+          value: "http://apphost/management"
+        - name: "RemoteClient__AppKey"
+          value: e824b2670e644824bdd5cdee1db9bd4b
+        - name: "RemoteClient__AppSecret"
+          value: 12d4deadf948
+        - name: "ASPNETCORE_ENVIRONMENT"
+          value: Production
+        ports:
+        - containerPort: 5000
