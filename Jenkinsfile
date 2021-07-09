@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t weatherforecast:v2 .';
+                sh 'docker build  --no-cache -t weatherforecast:v2 .';
             }
         }
         stage('Deployment') {
