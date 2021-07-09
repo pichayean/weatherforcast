@@ -56,7 +56,7 @@ pipeline {
                 script {
                     if (code == '200') {
                         echo '---remove old version images---'
-                        sh 'docker image rm -f weatherforecast:${DOCKER_OLD_TAG} .';
+                        sh 'docker image rm -f weatherforecast:${DOCKER_OLD_TAG}';
                         notify('Deploy new version Success 😜💖', '113')
                     } 
                 }
