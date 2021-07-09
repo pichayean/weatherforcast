@@ -35,5 +35,12 @@ namespace weatherforecast.Controllers
             })
             .ToArray();
         }
+        [HttpGet("Alive")]
+        public IActionResult Alive()
+        {
+            return Ok(new {
+                status = "alive"
+            });
+        }
     }
 }
