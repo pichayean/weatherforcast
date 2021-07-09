@@ -12,6 +12,10 @@ def getDockerTag(){
     def tag  = sh script: 'git rev-parse HEAD', returnStdout: true
     return tag
 }
+def getOldDockerTag(){
+    def oldtag  = sh script: 'git rev-parse @~', returnStdout: true
+    return oldtag
+}
 
 pipeline {
     agent any
@@ -19,9 +23,10 @@ pipeline {
         NEW_VERSION = '1.0.0'
         CI = 'true'
         DOCKER_TAG = getDockerTag()
+        DOCKER_OLD_TAG = getOldDockerTag()
     }
     stages {
-        stage('Build') {
+        stage('Build Docker Images') {
             steps {
                 sh 'docker build --no-cache -t weatherforecast:${DOCKER_TAG} .';
             }
@@ -46,14 +51,14 @@ pipeline {
                 }
             }
         }
-        stage('AppReady') {
+        stage('RemoveOldVersionImages') {
             steps {
                 script {
                     if (code == '200') {
-                        notify('Deploy new version Success 😜💖', '3')
-                    } else {
-                        echo 'I execute elsewhere'
-                    }
+                        echo '---remove old version images---'
+                        sh 'docker image rm -f weatherforecast:${DOCKER_OLD_TAG} .';
+                        notify('Deploy new version Success 😜💖', '113')
+                    } 
                 }
             }
         }

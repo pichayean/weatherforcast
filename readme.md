@@ -16,3 +16,22 @@ kubectl apply -f pod.yaml --namespace=test
 
 kubectl delete deployment weatherforcast-deployment
 kubectl delete service weatherforcast-service
+
+
+
+
+
+////888888888888888888888888888888888888888888888
+install mimikube
+https://www.atlantic.net/vps-hosting/how-to-install-kubernetes-with-minikube-on-centos-8/
+
+kubectl proxy --address='0.0.0.0' --disable-filter=true
+
+Jenkins
+http://194.233.73.42:31870/job/weather/
+
+https://ai1love6.medium.com/deploy-jenkins-on-k8s-c2df6c109915
+
+
+
+
