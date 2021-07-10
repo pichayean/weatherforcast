@@ -27,6 +27,10 @@ https://www.atlantic.net/vps-hosting/how-to-install-kubernetes-with-minikube-on-
 
 kubectl proxy --address='0.0.0.0' --disable-filter=true
 
+kubectl -n kubernetes-dashboard edit service kubernetes-dashboard
+
+
+
 Jenkins
 http://194.233.73.42:31870/job/weather/
 
