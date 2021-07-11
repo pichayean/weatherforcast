@@ -35,7 +35,7 @@ pipeline {
             steps {
                 sh "chmod +x sedtag.sh"
                 sh "./sedtag.sh ${DOCKER_TAG}"
-                sh 'kubectl apply -f app-deployment.yml';
+                sh 'kubectl apply -f deployment.yml';
             }
         }
         stage('Check Staging Ready') {
