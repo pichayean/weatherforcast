@@ -28,7 +28,7 @@ pipeline {
     stages {
         stage('Build Docker Images') {
             steps {
-                sh 'docker build --no-cache -t weatherforecast:v1 .';
+                sh 'docker build --no-cache -t weatherforecast:${DOCKER_TAG} .';
             }
         }
         stage('Deployment to kube') {
@@ -56,7 +56,7 @@ pipeline {
                 script {
                     if (code == '200') {
                         echo '---remove old version images---'
-                        // sh 'docker image rm -f weatherforecast:${DOCKER_OLD_TAG}';
+                        sh 'docker image rm -f weatherforecast:${DOCKER_OLD_TAG}';
                         notify('Deploy new version Success 😜💖', '113')
                     } 
                 }
