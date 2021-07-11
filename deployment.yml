@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: weatherforcast-container
-        image: weatherforecast:tagVersion
+        image: weatherforecast:v1
         resources:
           limits:
             memory: "128Mi"
