@@ -35,7 +35,7 @@ pipeline {
             steps {
                 sh "chmod +x sedtag.sh"
                 sh "./sedtag.sh ${DOCKER_TAG}"
-                sh 'kubectl apply -f deployment.yml';
+                sh 'kubectl apply -f app-deployment.yml';
             }
         }
         stage('Check Staging Ready') {
@@ -46,12 +46,13 @@ pipeline {
                         code = sh(returnStdout: true, script: "curl -o /dev/null -s -w '%{http_code}' http://194.233.73.42:3000/WeatherForecast/alive").trim()
                         echo "HTTP response status code: ${code}"
                     } catch (Exception e){
-                   	    notify('Something wrong (stage[Check Staging Ready]) 🤳🤳', '9')
+                        sh 'docker image rm -f weatherforecast:${DOCKER_TAG}';
+                   	notify('Something wrong (stage[Check Staging Ready]) 🤳🤳', '9')
                     }
                 }
             }
         }
-        stage('RemoveOldVersionImages') {
+        stage('rm images') {
             steps {
                 script {
                     if (code == '200') {
